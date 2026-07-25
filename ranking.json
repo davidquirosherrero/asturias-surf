@@ -8,6 +8,7 @@
   "spots": [
     {
       "name": "Tapia de Casariego",
+      "lat": 43.5667,
       "lon": -6.942,
       "score": 34.6,
       "wind_kmh": 4.7,
@@ -16,6 +17,7 @@
     },
     {
       "name": "Frejulfe",
+      "lat": 43.559,
       "lon": -6.687,
       "score": 24.6,
       "wind_kmh": 15.8,
@@ -23,7 +25,17 @@
       "nota": "Mejor a 4-6 pies con NW"
     },
     {
+      "name": "Playa de Aguilar",
+      "lat": 43.548,
+      "lon": -6.098,
+      "score": 24.6,
+      "wind_kmh": 20.2,
+      "wind_dir": 270.0,
+      "nota": "Olas nobles, buena para iniciación"
+    },
+    {
       "name": "Salinas / Espartal",
+      "lat": 43.587,
       "lon": -5.993,
       "score": 34.6,
       "wind_kmh": 20.2,
@@ -31,15 +43,8 @@
       "nota": "Muy consistente, funciona con poco mar"
     },
     {
-      "name": "Xagó",
-      "lon": -5.798,
-      "score": 24.6,
-      "wind_kmh": 17.3,
-      "wind_dir": 272.0,
-      "nota": "Potente, mejor en marea media-alta"
-    },
-    {
       "name": "Playón de Bayas",
+      "lat": 43.591,
       "lon": -6.035,
       "score": 24.6,
       "wind_kmh": 20.2,
@@ -47,7 +52,26 @@
       "nota": "Funciona incluso en meses pequeños de verano"
     },
     {
+      "name": "Bañugues",
+      "lat": 43.606,
+      "lon": -5.766,
+      "score": 24.6,
+      "wind_kmh": 17.3,
+      "wind_dir": 272.0,
+      "nota": "Condiciones particulares, exige NW limpio"
+    },
+    {
+      "name": "Xagó",
+      "lat": 43.605,
+      "lon": -5.798,
+      "score": 24.6,
+      "wind_kmh": 17.3,
+      "wind_dir": 272.0,
+      "nota": "Potente, mejor en marea media-alta"
+    },
+    {
       "name": "San Lorenzo",
+      "lat": 43.545,
       "lon": -5.642,
       "score": 24.6,
       "wind_kmh": 5.4,
@@ -56,6 +80,7 @@
     },
     {
       "name": "Rodiles",
+      "lat": 43.532,
       "lon": -5.381,
       "score": 24.6,
       "wind_kmh": 10.4,
@@ -63,7 +88,17 @@
       "nota": "Desembocadura, marea baja-media subiendo, muy técnico"
     },
     {
+      "name": "Vega",
+      "lat": 43.46,
+      "lon": -5.043,
+      "score": 28.6,
+      "wind_kmh": 10.4,
+      "wind_dir": 274.0,
+      "nota": "Extensa y muy abierta al Cantábrico, aguanta bien"
+    },
+    {
       "name": "Santa Marina",
+      "lat": 43.465,
       "lon": -5.057,
       "score": 54.6,
       "wind_kmh": 10.4,
@@ -71,7 +106,17 @@
       "nota": "Orientada NE, abrigada de todo salvo viento Norte"
     },
     {
+      "name": "Torimbia",
+      "lat": 43.463,
+      "lon": -4.845,
+      "score": 24.6,
+      "wind_kmh": 7.6,
+      "wind_dir": 246.0,
+      "nota": "Cala más resguardada, mejor con mar moderada"
+    },
+    {
       "name": "San Antolín",
+      "lat": 43.43,
       "lon": -4.79,
       "score": 24.6,
       "wind_kmh": 7.6,
@@ -79,5 +124,5 @@
       "nota": "Muy abierta, aguanta mucha mar"
     }
   ],
-  "generated_at": "2026-07-25T20:45:31.584992+00:00"
+  "generated_at": "2026-07-25T20:57:51.004712+00:00"
 }
