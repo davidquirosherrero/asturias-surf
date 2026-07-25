@@ -46,6 +46,7 @@
   .rank-num{ color:rgba(238,241,230,0.4); font-size:12px; }
   .rank-name{ font-size:13.5px; }
   .rank-name small{ display:block; color:rgba(238,241,230,0.5); font-size:11px; margin-top:2px; line-height:1.4; }
+  .rank-name .rank-detail{ color:var(--seafoam); font-size:10.5px; margin-top:4px; }
   .rank-score{ text-align:right; font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; }
   .bar-track{ height:3px; background:rgba(238,241,230,0.1); margin-top:6px; border-radius:2px; overflow:hidden; grid-column:2 / span 2; }
   .bar-fill{ height:100%; border-radius:2px; }
@@ -110,6 +111,23 @@ function scoreColor(s){
   return "#c65a4e";
 }
 
+function compass(deg){
+  if(deg === null || deg === undefined) return "";
+  const dirs = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"];
+  return dirs[Math.round(deg / 22.5) % 16];
+}
+
+function spotDetailLine(spot){
+  const parts = [];
+  if(spot.temp_c !== null && spot.temp_c !== undefined) parts.push(`🌡️ ${spot.temp_c}°C`);
+  if(spot.wind_kmh !== null && spot.wind_kmh !== undefined){
+    let windStr = `💨 ${spot.wind_kmh} km/h ${compass(spot.wind_dir)}`;
+    if(spot.wind_gust_kmh) windStr += ` (ráf. ${spot.wind_gust_kmh})`;
+    parts.push(windStr);
+  }
+  return parts.join('  ·  ');
+}
+
 async function loadData(){
   try{
     const res = await fetch('ranking.json', { cache: 'no-store' });
@@ -127,7 +145,7 @@ function render(DATA){
   document.getElementById('app').style.display = 'block';
   document.getElementById('meta-hm0').textContent = DATA.buoy.hm0 + " m";
   document.getElementById('meta-tp').textContent = DATA.buoy.tp + " s";
-  document.getElementById('meta-dir').textContent = DATA.buoy.dir + "°";
+  document.getElementById('meta-dir').textContent = DATA.buoy.dir + "° " + compass(DATA.buoy.dir);
   document.getElementById('meta-ts').textContent =
     new Date(DATA.buoy.ts).toLocaleString('es-ES', {hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit'}) + " UTC";
 
@@ -150,7 +168,8 @@ function render(DATA){
     marker.bindPopup(
       `<div class="popup-score" style="color:${color}">${spot.score.toFixed(1)}</div>
        <div style="font-weight:600;margin-top:2px;">${spot.name}</div>
-       <div style="opacity:0.75;margin-top:4px;font-size:11px;">${spot.nota}</div>`
+       <div style="opacity:0.75;margin-top:4px;font-size:11px;">${spot.nota}</div>
+       <div style="opacity:0.65;margin-top:6px;font-size:11px;">${spotDetailLine(spot)}</div>`
     );
   });
 
@@ -163,7 +182,7 @@ function render(DATA){
     row.innerHTML = `
       <div class="rank-num">${String(i+1).padStart(2,'0')}</div>
       <div>
-        <div class="rank-name">${spot.name}<small>${spot.nota}</small></div>
+        <div class="rank-name">${spot.name}<small>${spot.nota}</small><small class="rank-detail">${spotDetailLine(spot)}</small></div>
         <div class="bar-track"><div class="bar-fill" style="width:${spot.score}%; background:${color}"></div></div>
       </div>
       <div class="rank-score" style="color:${color}">${spot.score.toFixed(1)}</div>
