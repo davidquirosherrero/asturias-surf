@@ -69,12 +69,9 @@
   <p class="eyebrow">Piloto · dato en vivo</p>
   <h1>Ranking de spots — costa asturiana</h1>
   <div class="meta">
-    <span>Boya · <b>Cabo de Peñas</b></span>
-    <span>Hm0 <b id="meta-hm0">—</b></span>
-    <span>Tp <b id="meta-tp">—</b></span>
-    <span>Swell <b id="meta-dir">—</b></span>
+    <span>Boyas · <b>Cabo de Peñas</b> · <b>Estaca de Bares</b> · <b>Bilbao-Vizcaya</b></span>
   </div>
-  <div class="meta"><span>Lectura <b id="meta-ts">—</b></span></div>
+  <div class="meta" id="buoysRow"></div>
 </header>
 
 <div id="err"></div>
@@ -119,6 +116,7 @@ function compass(deg){
 
 function spotDetailLine(spot){
   const parts = [];
+  parts.push(`🌊 ${spot.hm0}m ${spot.tp}s ${compass(spot.swell_dir)} <span style="opacity:0.6">(${spot.boya})</span>`);
   if(spot.temp_c !== null && spot.temp_c !== undefined) parts.push(`🌡️ ${spot.temp_c}°C`);
   if(spot.wind_kmh !== null && spot.wind_kmh !== undefined){
     let windStr = `💨 ${spot.wind_kmh} km/h ${compass(spot.wind_dir)}`;
@@ -143,11 +141,12 @@ async function loadData(){
 
 function render(DATA){
   document.getElementById('app').style.display = 'block';
-  document.getElementById('meta-hm0').textContent = DATA.buoy.hm0 + " m";
-  document.getElementById('meta-tp').textContent = DATA.buoy.tp + " s";
-  document.getElementById('meta-dir').textContent = DATA.buoy.dir + "° " + compass(DATA.buoy.dir);
-  document.getElementById('meta-ts').textContent =
-    new Date(DATA.buoy.ts).toLocaleString('es-ES', {hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit'}) + " UTC";
+  const buoysRow = document.getElementById('buoysRow');
+  Object.values(DATA.buoys).forEach(b => {
+    const span = document.createElement('span');
+    span.innerHTML = `${b.nombre}: <b>${b.hm0}m ${b.tp}s ${b.dir}°${compass(b.dir)}</b>`;
+    buoysRow.appendChild(span);
+  });
 
   const sorted = [...DATA.spots].sort((a,b) => b.score - a.score);
 
