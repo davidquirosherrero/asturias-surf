@@ -53,7 +53,11 @@ from datetime import datetime, timedelta, timezone
 # ---------------------------------------------------------------------
 AEMET_API_KEY = os.environ.get("AEMET_API_KEY", "")  # <-- pega tu clave aquí o via env var
 
-STATION_CABO_PENAS = 2242
+BUOYS = {
+    "cabo_penas": {"station": 2242, "nombre": "Cabo de Peñas"},
+    "estaca_bares": {"station": 2244, "nombre": "Estaca de Bares"},
+    "bilbao_vizcaya": {"station": 2136, "nombre": "Bilbao-Vizcaya"},
+}
 BUOY_URL = (
     "https://poem.puertos.es/portus/StationData"
     "?code={station}&params=Hm0,Tp,MeanDir180&from={dfrom}@0000&to={dto}@2359"
@@ -67,59 +71,59 @@ AEMET_TODAS_URL = "https://opendata.aemet.es/opendata/api/observacion/convencion
 #   Castropol=1331A, Colunga=1203D, Llanes=1183X)
 # ---------------------------------------------------------------------
 SPOTS = [
-    {"name": "Tapia de Casariego", "lat": 43.5667, "lon": -6.942, "dir_optima": 315, "tolerancia": 60,
+    {"name": "Tapia de Casariego", "boya": "estaca_bares", "lat": 43.5667, "lon": -6.942, "dir_optima": 315, "tolerancia": 60,
      "idema": "1331A", "viento_offshore": 45,
      "nota": "Orientación occidental: el NE es offshore/lateral aquí, al revés que en el resto de Asturias"},
-    {"name": "Frejulfe", "lat": 43.5590, "lon": -6.687, "dir_optima": 315, "tolerancia": 30,
+    {"name": "Frejulfe", "boya": "estaca_bares", "lat": 43.5590, "lon": -6.687, "dir_optima": 315, "tolerancia": 30,
      "idema": "1283U", "viento_offshore": 135,
      "nota": "Mejor a 4-6 pies con NW"},
-    {"name": "Playa de Otur", "lat": 43.553, "lon": -6.597, "dir_optima": 315, "tolerancia": 50,
+    {"name": "Playa de Otur", "boya": "estaca_bares", "lat": 43.553, "lon": -6.597, "dir_optima": 315, "tolerancia": 50,
      "idema": "1283U", "viento_offshore": 180,
      "nota": "\"Brutal Beach\": surfable con cualquier marea, muy consistente todo el año"},
-    {"name": "Playa de Cueva", "lat": 43.550, "lon": -6.469, "dir_optima": 315, "tolerancia": 25,
+    {"name": "Playa de Cueva", "boya": "estaca_bares", "lat": 43.550, "lon": -6.469, "dir_optima": 315, "tolerancia": 25,
      "idema": "1283U", "viento_offshore": 135,
      "nota": "Desembocadura del Esva, corrientes fuertes; solo funciona de vez en cuando"},
-    {"name": "Playa de Aguilar", "lat": 43.5480, "lon": -6.098, "dir_optima": 315, "tolerancia": 45,
+    {"name": "Playa de Aguilar", "boya": "estaca_bares", "lat": 43.5480, "lon": -6.098, "dir_optima": 315, "tolerancia": 45,
      "idema": "1212E", "viento_offshore": 135,
      "nota": "Olas nobles, buena para iniciación"},
-    {"name": "Salinas / Espartal", "lat": 43.5870, "lon": -5.993, "dir_optima": 315, "tolerancia": 60,
+    {"name": "Salinas / Espartal", "boya": "cabo_penas", "lat": 43.5870, "lon": -5.993, "dir_optima": 315, "tolerancia": 60,
      "idema": "1212E", "viento_offshore": 135,
      "nota": "Muy consistente, funciona con poco mar"},
-    {"name": "Playón de Bayas", "lat": 43.5910, "lon": -6.035, "dir_optima": 315, "tolerancia": 45,
+    {"name": "Playón de Bayas", "boya": "cabo_penas", "lat": 43.5910, "lon": -6.035, "dir_optima": 315, "tolerancia": 45,
      "idema": "1212E", "viento_offshore": 135,
      "nota": "Funciona incluso en meses pequeños de verano"},
-    {"name": "Bañugues", "lat": 43.6060, "lon": -5.766, "dir_optima": 315, "tolerancia": 35,
+    {"name": "Bañugues", "boya": "cabo_penas", "lat": 43.6060, "lon": -5.766, "dir_optima": 315, "tolerancia": 35,
      "idema": "1210X", "viento_offshore": 135,
      "nota": "Condiciones particulares, exige NW limpio"},
-    {"name": "Xagó", "lat": 43.6050, "lon": -5.798, "dir_optima": 315, "tolerancia": 30,
+    {"name": "Xagó", "boya": "cabo_penas", "lat": 43.6050, "lon": -5.798, "dir_optima": 315, "tolerancia": 30,
      "idema": "1210X", "viento_offshore": 135,
      "nota": "Potente, mejor en marea media-alta"},
-    {"name": "San Lorenzo", "lat": 43.5450, "lon": -5.642, "dir_optima": 315, "tolerancia": 40,
+    {"name": "San Lorenzo", "boya": "cabo_penas", "lat": 43.5450, "lon": -5.642, "dir_optima": 315, "tolerancia": 40,
      "idema": "1208H", "viento_offshore": 135,
      "nota": "Urbana, accesible, moderada"},
-    {"name": "Rodiles", "lat": 43.5320, "lon": -5.381, "dir_optima": 315, "tolerancia": 25,
+    {"name": "Rodiles", "boya": "bilbao_vizcaya", "lat": 43.5320, "lon": -5.381, "dir_optima": 315, "tolerancia": 25,
      "idema": "1204X", "viento_offshore": 135,
      "nota": "Desembocadura, marea baja-media subiendo, muy técnico"},
-    {"name": "Vega", "lat": 43.4600, "lon": -5.043, "dir_optima": 315, "tolerancia": 50,
+    {"name": "Vega", "boya": "bilbao_vizcaya", "lat": 43.4600, "lon": -5.043, "dir_optima": 315, "tolerancia": 50,
      "idema": "1204X", "viento_offshore": 135,
      "nota": "Extensa y muy abierta al Cantábrico, aguanta bien"},
-    {"name": "Santa Marina", "lat": 43.4650, "lon": -5.057, "dir_optima": 10, "tolerancia": 40,
+    {"name": "Santa Marina", "boya": "bilbao_vizcaya", "lat": 43.4650, "lon": -5.057, "dir_optima": 10, "tolerancia": 40,
      "idema": "1204X", "viento_offshore": 190,
      "nota": "Orientada NE, abrigada de todo salvo viento Norte"},
-    {"name": "Torimbia", "lat": 43.4630, "lon": -4.845, "dir_optima": 315, "tolerancia": 40,
+    {"name": "Torimbia", "boya": "bilbao_vizcaya", "lat": 43.4630, "lon": -4.845, "dir_optima": 315, "tolerancia": 40,
      "idema": "1183X", "viento_offshore": 135,
      "nota": "Cala más resguardada, mejor con mar moderada"},
-    {"name": "San Antolín", "lat": 43.4300, "lon": -4.79, "dir_optima": 315, "tolerancia": 45,
+    {"name": "San Antolín", "boya": "bilbao_vizcaya", "lat": 43.4300, "lon": -4.79, "dir_optima": 315, "tolerancia": 45,
      "idema": "1183X", "viento_offshore": 135,
      "nota": "Muy abierta, aguanta mucha mar"},
 ]
 
 
-def fetch_buoy_data(hours_back=30):
+def fetch_buoy_data(station, hours_back=30):
     now = datetime.now(timezone.utc)
     dfrom = (now - timedelta(hours=hours_back)).strftime("%Y%m%d")
     dto = now.strftime("%Y%m%d")
-    url = BUOY_URL.format(station=STATION_CABO_PENAS, dfrom=dfrom, dto=dto)
+    url = BUOY_URL.format(station=station, dfrom=dfrom, dto=dto)
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=15) as resp:
         raw = resp.read().decode("utf-8")
@@ -139,6 +143,24 @@ def latest_reading(readings):
         "tp": tp[0],
         "dir_procedencia": procedencia,
     }
+
+
+def fetch_all_buoys():
+    """
+    Devuelve dict {boya_key: reading_dict} con la última lectura de cada
+    una de las 3 boyas en BUOYS. Si una boya falla, se omite (no rompe
+    el resto) y se avisa por stdout.
+    """
+    readings_by_buoy = {}
+    for key, info in BUOYS.items():
+        try:
+            readings = fetch_buoy_data(info["station"])
+            readings_by_buoy[key] = latest_reading(readings)
+        except (urllib.error.URLError, RuntimeError, json.JSONDecodeError) as e:
+            print(f"AVISO: fallo al leer la boya {info['nombre']} ({e}). Se omite.")
+    if not readings_by_buoy:
+        raise RuntimeError("Ninguna de las 3 boyas ha respondido.")
+    return readings_by_buoy
 
 
 def fetch_aemet_wind(api_key):
@@ -188,6 +210,19 @@ def angular_diff(a, b):
     return min(d, 360 - d)
 
 
+def reading_for_spot(spot, readings_by_buoy):
+    """Lectura de la boya asignada al spot; si esa boya falló, usa cualquier
+    otra disponible (preferentemente Cabo de Peñas, por ser la más central).
+    Devuelve (reading, boya_key_realmente_usada, es_fallback)."""
+    r = readings_by_buoy.get(spot["boya"])
+    if r is not None:
+        return r, spot["boya"], False
+    if "cabo_penas" in readings_by_buoy:
+        return readings_by_buoy["cabo_penas"], "cabo_penas", True
+    fallback_key = next(iter(readings_by_buoy))
+    return readings_by_buoy[fallback_key], fallback_key, True
+
+
 def score_spot(spot, reading, wind_by_idema):
     diff = angular_diff(reading["dir_procedencia"], spot["dir_optima"])
     dir_score = max(0, 100 - (diff / spot["tolerancia"]) * 100)
@@ -231,16 +266,22 @@ def score_spot(spot, reading, wind_by_idema):
     }
 
 
-def build_json_output(r, wind_by_idema):
+def build_json_output(readings_by_buoy, wind_by_idema):
     """Construye la estructura que consume ranking_spots_asturias.html vía fetch()."""
     spots_out = []
     for spot in SPOTS:
+        r, boya_usada, es_fallback = reading_for_spot(spot, readings_by_buoy)
         score, wind = score_spot(spot, r, wind_by_idema)
+        nombre_boya = BUOYS[boya_usada]["nombre"] + (" (fallback)" if es_fallback else "")
         spots_out.append({
             "name": spot["name"],
             "lat": spot["lat"],
             "lon": spot["lon"],
             "score": score,
+            "boya": nombre_boya,
+            "hm0": r["hm0"],
+            "tp": r["tp"],
+            "swell_dir": round(r["dir_procedencia"]),
             "wind_kmh": wind["vv_kmh"] if wind else None,
             "wind_dir": wind["dv"] if wind else None,
             "wind_gust_kmh": wind["vmax_kmh"] if wind else None,
@@ -248,11 +289,15 @@ def build_json_output(r, wind_by_idema):
             "nota": spot["nota"],
         })
     return {
-        "buoy": {
-            "hm0": r["hm0"],
-            "tp": r["tp"],
-            "dir": round(r["dir_procedencia"]),
-            "ts": r["timestamp"].isoformat(),
+        "buoys": {
+            key: {
+                "nombre": BUOYS[key]["nombre"],
+                "hm0": r["hm0"],
+                "tp": r["tp"],
+                "dir": round(r["dir_procedencia"]),
+                "ts": r["timestamp"].isoformat(),
+            }
+            for key, r in readings_by_buoy.items()
         },
         "spots": spots_out,
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -260,31 +305,31 @@ def build_json_output(r, wind_by_idema):
 
 
 def main():
-    readings = fetch_buoy_data()
-    r = latest_reading(readings)
+    readings_by_buoy = fetch_all_buoys()
     wind_by_idema = fetch_aemet_wind(AEMET_API_KEY)
 
-    print(f"\nBoya Cabo de Peñas — lectura de {r['timestamp']} UTC")
-    print(f"Hm0={r['hm0']} m | Tp={r['tp']} s | "
-          f"dirección de procedencia={r['dir_procedencia']:.0f}°")
+    print(f"\nBoyas leídas: {', '.join(BUOYS[k]['nombre'] for k in readings_by_buoy)}")
+    for key, r in readings_by_buoy.items():
+        print(f"  {BUOYS[key]['nombre']:<16} Hm0={r['hm0']} m | Tp={r['tp']} s | "
+              f"dir={r['dir_procedencia']:.0f}° | {r['timestamp']} UTC")
     if wind_by_idema is None:
         print("(Sin datos de viento AEMET -- configura AEMET_API_KEY para incluirlo)\n")
     else:
         print(f"(Viento AEMET incorporado, {len(wind_by_idema)} estaciones recibidas)\n")
 
-    ranked = sorted(
-        ((spot,) + score_spot(spot, r, wind_by_idema) for spot in SPOTS),
-        key=lambda x: x[1],
-        reverse=True,
-    )
+    def score_with_reading(spot):
+        r, _, _ = reading_for_spot(spot, readings_by_buoy)
+        return (spot,) + score_spot(spot, r, wind_by_idema)
 
-    print(f"{'Spot':<22} {'Score':>6}   {'Viento':<14} Nota")
-    print("-" * 95)
+    ranked = sorted((score_with_reading(spot) for spot in SPOTS), key=lambda x: x[1], reverse=True)
+
+    print(f"{'Spot':<22} {'Score':>6}   {'Boya':<16} {'Viento':<14} Nota")
+    print("-" * 110)
     for spot, score, wind in ranked:
         wind_str = f"{wind['vv_kmh']}km/h {wind['dv']:.0f}°" if wind else "n/d"
-        print(f"{spot['name']:<22} {score:>5.1f}   {wind_str:<14} {spot['nota']}")
+        print(f"{spot['name']:<22} {score:>5.1f}   {BUOYS[spot['boya']]['nombre']:<16} {wind_str:<14} {spot['nota']}")
 
-    output = build_json_output(r, wind_by_idema)
+    output = build_json_output(readings_by_buoy, wind_by_idema)
     with open("ranking.json", "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
     print("\nEscrito ranking.json")
