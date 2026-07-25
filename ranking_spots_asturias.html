@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ranking de spots — Asturias</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
   :root{
@@ -21,86 +23,38 @@
     color:var(--chart-cream);
     font-family:'Courier New', ui-monospace, monospace;
   }
-  header{
-    padding:24px 20px 16px;
-    border-bottom:1px solid rgba(238,241,230,0.15);
-  }
-  .eyebrow{
-    font-size:10.5px;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--seafoam);
-    margin:0 0 6px;
-  }
-  h1{
-    margin:0;
-    font-family:Georgia, 'Times New Roman', serif;
-    font-weight:400;
-    font-size:24px;
-    line-height:1.2;
-  }
-  .meta{
-    margin-top:12px;
-    font-size:12px;
-    color:rgba(238,241,230,0.65);
-    display:flex;
-    gap:8px 16px;
-    flex-wrap:wrap;
-  }
+  header{ padding:24px 20px 16px; border-bottom:1px solid rgba(238,241,230,0.15); }
+  .eyebrow{ font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--seafoam); margin:0 0 6px; }
+  h1{ margin:0; font-family:Georgia, 'Times New Roman', serif; font-weight:400; font-size:24px; line-height:1.2; }
+  .meta{ margin-top:12px; font-size:12px; color:rgba(238,241,230,0.65); display:flex; gap:8px 16px; flex-wrap:wrap; }
   .meta b{color:var(--chart-cream); font-weight:600;}
   main{ max-width:720px; margin:0 auto; }
   section{ padding:22px 20px; }
   section + section{ border-top:1px solid rgba(238,241,230,0.1); }
-  .section-title{
-    font-size:10.5px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--seafoam);
-    margin-bottom:16px;
-  }
+  .section-title{ font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--seafoam); margin-bottom:16px; }
 
-  /* Carta de costa: lista vertical norte->sur en el orden oeste->este, mejor para pantalla estrecha */
-  .coast-list{ display:flex; flex-direction:column; }
-  .coast-row{
-    display:grid;
-    grid-template-columns:16px 1fr 44px;
-    align-items:center;
-    gap:10px;
-    padding:9px 0;
-  }
-  .coast-dot{ width:12px; height:12px; border-radius:50%; }
-  .coast-name{ font-size:13px; }
-  .coast-score{ text-align:right; font-weight:700; font-size:14px; font-variant-numeric:tabular-nums; }
-  .coast-edge{ font-size:9.5px; color:rgba(238,241,230,0.4); letter-spacing:0.06em; padding:4px 0; }
+  #map{ height:360px; border-radius:6px; }
+  .leaflet-popup-content-wrapper{ background:var(--navy); color:var(--chart-cream); font-family:'Courier New', monospace; border-radius:4px; }
+  .leaflet-popup-tip{ background:var(--navy); }
+  .popup-score{ font-size:19px; font-weight:700; }
 
   .rank-row{
-    display:grid;
-    grid-template-columns:24px 1fr 52px;
-    align-items:center;
-    gap:10px;
-    padding:11px 0;
-    border-bottom:1px solid rgba(238,241,230,0.08);
+    display:grid; grid-template-columns:24px 1fr 52px; align-items:center; gap:10px;
+    padding:11px 0; border-bottom:1px solid rgba(238,241,230,0.08);
   }
   .rank-row:last-child{ border-bottom:none; }
   .rank-num{ color:rgba(238,241,230,0.4); font-size:12px; }
   .rank-name{ font-size:13.5px; }
   .rank-name small{ display:block; color:rgba(238,241,230,0.5); font-size:11px; margin-top:2px; line-height:1.4; }
   .rank-score{ text-align:right; font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; }
-  .bar-track{
-    height:3px; background:rgba(238,241,230,0.1); margin-top:6px;
-    border-radius:2px; overflow:hidden; grid-column:2 / span 2;
-  }
+  .bar-track{ height:3px; background:rgba(238,241,230,0.1); margin-top:6px; border-radius:2px; overflow:hidden; grid-column:2 / span 2; }
   .bar-fill{ height:100%; border-radius:2px; }
 
-  .chart-box{ position:relative; height:280px; }
+  .chart-box{ position:relative; height:340px; }
 
   .note{
-    padding:14px 16px;
-    border-left:2px solid var(--buoy-yellow);
-    background:rgba(232,169,76,0.06);
-    font-size:11.5px;
-    line-height:1.55;
-    color:rgba(238,241,230,0.8);
+    padding:14px 16px; border-left:2px solid var(--buoy-yellow);
+    background:rgba(232,169,76,0.06); font-size:11.5px; line-height:1.55; color:rgba(238,241,230,0.8);
   }
   #err{
     margin:20px; padding:14px 16px; border-left:2px solid var(--coral-low);
@@ -119,14 +73,17 @@
     <span>Tp <b id="meta-tp">—</b></span>
     <span>Swell <b id="meta-dir">—</b></span>
   </div>
-  <div class="meta">
-    <span>Lectura <b id="meta-ts">—</b></span>
-  </div>
+  <div class="meta"><span>Lectura <b id="meta-ts">—</b></span></div>
 </header>
 
 <div id="err"></div>
 
 <main id="app" style="display:none;">
+  <section>
+    <div class="section-title">Mapa</div>
+    <div id="map"></div>
+  </section>
+
   <section>
     <div class="section-title">Ranking</div>
     <div id="ranking"></div>
@@ -138,17 +95,10 @@
   </section>
 
   <section>
-    <div class="section-title">Carta de costa (oeste → este)</div>
-    <div class="coast-edge">OESTE — Tapia de Casariego</div>
-    <div class="coast-list" id="coastList"></div>
-    <div class="coast-edge" style="text-align:right;">ESTE — San Antolín (Llanes)</div>
-  </section>
-
-  <section>
     <div class="note">
       Dato de oleaje: boya de Cabo de Peñas (Puertos del Estado). Dato de viento: AEMET OpenData,
-      estación terrestre más cercana a cada spot. Coordenadas de spots aproximadas por longitud,
-      pendientes de afinar sobre un mapa real. Actualización automática cada hora vía GitHub Actions.
+      estación terrestre más cercana a cada spot. Coordenadas de spots aproximadas (centro del
+      arenal), pendientes de afinar. Actualización automática cada hora vía GitHub Actions.
     </div>
   </section>
 </main>
@@ -169,8 +119,7 @@ async function loadData(){
   }catch(err){
     const el = document.getElementById('err');
     el.style.display = 'block';
-    el.innerHTML = `<b>Error cargando ranking.json:</b> ${err.message}. Comprueba que el archivo
-      existe en el repo y que GitHub Pages está sirviendo desde la rama correcta.`;
+    el.innerHTML = `<b>Error cargando ranking.json:</b> ${err.message}.`;
   }
 }
 
@@ -183,9 +132,29 @@ function render(DATA){
     new Date(DATA.buoy.ts).toLocaleString('es-ES', {hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit'}) + " UTC";
 
   const sorted = [...DATA.spots].sort((a,b) => b.score - a.score);
-  const byLon = [...DATA.spots].sort((a,b) => a.lon - b.lon);
 
-  // Ranking
+  // --- Mapa real ---
+  const centerLat = DATA.spots.reduce((s,x)=>s+x.lat,0) / DATA.spots.length;
+  const centerLon = DATA.spots.reduce((s,x)=>s+x.lon,0) / DATA.spots.length;
+  const map = L.map('map').setView([centerLat, centerLon], 9);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 15
+  }).addTo(map);
+
+  DATA.spots.forEach(spot => {
+    const color = scoreColor(spot.score);
+    const marker = L.circleMarker([spot.lat, spot.lon], {
+      radius: 8, color: color, fillColor: color, fillOpacity: 0.85, weight: 2
+    }).addTo(map);
+    marker.bindPopup(
+      `<div class="popup-score" style="color:${color}">${spot.score.toFixed(1)}</div>
+       <div style="font-weight:600;margin-top:2px;">${spot.name}</div>
+       <div style="opacity:0.75;margin-top:4px;font-size:11px;">${spot.nota}</div>`
+    );
+  });
+
+  // --- Ranking ---
   const rankingEl = document.getElementById('ranking');
   sorted.forEach((spot, i) => {
     const color = scoreColor(spot.score);
@@ -199,24 +168,12 @@ function render(DATA){
       </div>
       <div class="rank-score" style="color:${color}">${spot.score.toFixed(1)}</div>
     `;
+    row.style.cursor = 'pointer';
+    row.addEventListener('click', () => map.flyTo([spot.lat, spot.lon], 12, { duration: 0.6 }));
     rankingEl.appendChild(row);
   });
 
-  // Carta de costa: lista vertical, una fila por spot, sin solapes posibles
-  const coastEl = document.getElementById('coastList');
-  byLon.forEach(spot => {
-    const color = scoreColor(spot.score);
-    const row = document.createElement('div');
-    row.className = 'coast-row';
-    row.innerHTML = `
-      <div class="coast-dot" style="background:${color}"></div>
-      <div class="coast-name">${spot.name}</div>
-      <div class="coast-score" style="color:${color}">${spot.score.toFixed(0)}</div>
-    `;
-    coastEl.appendChild(row);
-  });
-
-  // Gráfico — contenedor con altura fija (chart-box), maintainAspectRatio:false
+  // --- Gráfico ---
   new Chart(document.getElementById('scoreChart'), {
     type: 'bar',
     data: {
@@ -224,18 +181,15 @@ function render(DATA){
       datasets: [{
         data: sorted.map(s => s.score),
         backgroundColor: sorted.map(s => scoreColor(s.score)),
-        borderRadius: 3,
-        barThickness: 12
+        borderRadius: 3, barThickness: 11
       }]
     },
     options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
         x: { min: 0, max: 100, grid: { color: 'rgba(238,241,230,0.08)' }, ticks: { color: 'rgba(238,241,230,0.5)', font: { size: 9 } } },
-        y: { grid: { display: false }, ticks: { color: 'rgba(238,241,230,0.75)', font: { size: 9.5 } } }
+        y: { grid: { display: false }, ticks: { color: 'rgba(238,241,230,0.75)', font: { size: 9 } } }
       }
     }
   });
