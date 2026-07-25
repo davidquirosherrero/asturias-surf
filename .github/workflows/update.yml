@@ -1,0 +1,33 @@
+name: Actualizar ranking de spots
+
+on:
+  schedule:
+    # Cada hora, a los 10 minutos (deja margen a que la boya publique su lectura horaria)
+    - cron: "10 * * * *"
+  workflow_dispatch: {}   # permite lanzarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ejecutar script
+        env:
+          AEMET_API_KEY: ${{ secrets.AEMET_API_KEY }}
+        run: python3 ranking_spots_asturias.py
+
+      - name: Publicar ranking.json si ha cambiado
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add ranking.json
+          git diff --staged --quiet || git commit -m "Actualizar ranking $(date -u +%Y-%m-%dT%H:%M)"
+          git push
