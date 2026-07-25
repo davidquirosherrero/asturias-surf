@@ -173,7 +173,13 @@ def fetch_aemet_wind(api_key):
         if idema and "vv" in est and "dv" in est and "fint" in est:
             actual = wind_by_idema.get(idema)
             if actual is None or est["fint"] > actual["fint"]:
-                wind_by_idema[idema] = {"vv": est["vv"], "dv": est["dv"], "fint": est["fint"]}
+                wind_by_idema[idema] = {
+                    "vv": est["vv"],
+                    "dv": est["dv"],
+                    "fint": est["fint"],
+                    "ta": est.get("ta"),      # temperatura del aire, °C
+                    "vmax": est.get("vmax"),  # ráfaga máxima, m/s
+                }
     return wind_by_idema
 
 
@@ -217,7 +223,12 @@ def score_spot(spot, reading, wind_by_idema):
 
     total = (dir_score * 0.40 + height_score * 0.20 + period_score * 0.15
              + wind_dir_score * 0.25)
-    return round(total, 1), {"vv_kmh": round(vv_kmh, 1), "dv": wind_info["dv"]}
+    return round(total, 1), {
+        "vv_kmh": round(vv_kmh, 1),
+        "dv": wind_info["dv"],
+        "ta": wind_info.get("ta"),
+        "vmax_kmh": round(wind_info["vmax"] * 3.6, 1) if wind_info.get("vmax") is not None else None,
+    }
 
 
 def build_json_output(r, wind_by_idema):
@@ -232,6 +243,8 @@ def build_json_output(r, wind_by_idema):
             "score": score,
             "wind_kmh": wind["vv_kmh"] if wind else None,
             "wind_dir": wind["dv"] if wind else None,
+            "wind_gust_kmh": wind["vmax_kmh"] if wind else None,
+            "temp_c": wind["ta"] if wind else None,
             "nota": spot["nota"],
         })
     return {
