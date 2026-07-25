@@ -22,12 +22,12 @@
     font-family:'Courier New', ui-monospace, monospace;
   }
   header{
-    padding:28px 32px 18px;
+    padding:24px 20px 16px;
     border-bottom:1px solid rgba(238,241,230,0.15);
   }
   .eyebrow{
-    font-size:11px;
-    letter-spacing:0.18em;
+    font-size:10.5px;
+    letter-spacing:0.16em;
     text-transform:uppercase;
     color:var(--seafoam);
     margin:0 0 6px;
@@ -36,98 +36,76 @@
     margin:0;
     font-family:Georgia, 'Times New Roman', serif;
     font-weight:400;
-    font-size:28px;
-    letter-spacing:0.01em;
+    font-size:24px;
+    line-height:1.2;
   }
   .meta{
-    margin-top:10px;
-    font-size:12.5px;
+    margin-top:12px;
+    font-size:12px;
     color:rgba(238,241,230,0.65);
     display:flex;
-    gap:22px;
+    gap:8px 16px;
     flex-wrap:wrap;
   }
   .meta b{color:var(--chart-cream); font-weight:600;}
-  main{
-    display:grid;
-    grid-template-columns:1.15fr 1fr;
-    gap:0;
-  }
-  @media (max-width:860px){ main{grid-template-columns:1fr;} }
-
-  #chart-panel{
-    padding:28px 32px;
-    border-right:1px solid rgba(238,241,230,0.1);
-  }
-  .chart-title{
-    font-size:11px;
+  main{ max-width:720px; margin:0 auto; }
+  section{ padding:22px 20px; }
+  section + section{ border-top:1px solid rgba(238,241,230,0.1); }
+  .section-title{
+    font-size:10.5px;
     letter-spacing:0.14em;
     text-transform:uppercase;
     color:var(--seafoam);
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
-  #coastSvg{ width:100%; height:auto; display:block; }
-  .coast-label{ font-size:9px; fill:rgba(238,241,230,0.4); letter-spacing:0.05em; }
-  .spot-label{ font-size:10.5px; fill:var(--chart-cream); font-weight:600; }
-  .spot-sub{ font-size:9px; fill:rgba(238,241,230,0.5); }
-  .spot-dot{ cursor:pointer; transition:r 0.15s ease; }
-  .spot-dot:hover{ r:11; }
-  .stem{ stroke:rgba(238,241,230,0.25); stroke-width:1; stroke-dasharray:2,2; }
 
-  .panel{ padding:24px 28px; }
+  /* Carta de costa: lista vertical norte->sur en el orden oeste->este, mejor para pantalla estrecha */
+  .coast-list{ display:flex; flex-direction:column; }
+  .coast-row{
+    display:grid;
+    grid-template-columns:16px 1fr 44px;
+    align-items:center;
+    gap:10px;
+    padding:9px 0;
+  }
+  .coast-dot{ width:12px; height:12px; border-radius:50%; }
+  .coast-name{ font-size:13px; }
+  .coast-score{ text-align:right; font-weight:700; font-size:14px; font-variant-numeric:tabular-nums; }
+  .coast-edge{ font-size:9.5px; color:rgba(238,241,230,0.4); letter-spacing:0.06em; padding:4px 0; }
+
   .rank-row{
     display:grid;
-    grid-template-columns:28px 1fr 56px;
+    grid-template-columns:24px 1fr 52px;
     align-items:center;
-    gap:12px;
+    gap:10px;
     padding:11px 0;
     border-bottom:1px solid rgba(238,241,230,0.08);
-    cursor:pointer;
   }
-  .rank-row:hover{ background:rgba(238,241,230,0.04); }
-  .rank-num{ color:rgba(238,241,230,0.4); font-size:13px; }
-  .rank-name{ font-size:14.5px; }
-  .rank-name small{ display:block; color:rgba(238,241,230,0.5); font-size:11.5px; margin-top:2px; }
-  .rank-score{
-    text-align:right;
-    font-size:16px;
-    font-weight:700;
-    font-variant-numeric:tabular-nums;
-  }
+  .rank-row:last-child{ border-bottom:none; }
+  .rank-num{ color:rgba(238,241,230,0.4); font-size:12px; }
+  .rank-name{ font-size:13.5px; }
+  .rank-name small{ display:block; color:rgba(238,241,230,0.5); font-size:11px; margin-top:2px; line-height:1.4; }
+  .rank-score{ text-align:right; font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; }
   .bar-track{
-    height:3px;
-    background:rgba(238,241,230,0.1);
-    margin-top:6px;
-    border-radius:2px;
-    overflow:hidden;
-    grid-column:2 / span 2;
+    height:3px; background:rgba(238,241,230,0.1); margin-top:6px;
+    border-radius:2px; overflow:hidden; grid-column:2 / span 2;
   }
   .bar-fill{ height:100%; border-radius:2px; }
-  canvas{ max-height:220px; }
-  .chart-wrap{ margin-top:26px; }
+
+  .chart-box{ position:relative; height:280px; }
+
   .note{
-    margin-top:26px;
     padding:14px 16px;
     border-left:2px solid var(--buoy-yellow);
     background:rgba(232,169,76,0.06);
-    font-size:12.5px;
+    font-size:11.5px;
     line-height:1.55;
     color:rgba(238,241,230,0.8);
   }
-  #tooltip{
-    position:fixed;
-    pointer-events:none;
-    background:var(--navy);
-    border:1px solid rgba(238,241,230,0.15);
-    border-radius:4px;
-    padding:10px 12px;
-    font-size:11.5px;
-    max-width:220px;
-    display:none;
-    z-index:50;
-    box-shadow:0 8px 24px rgba(0,0,0,0.4);
+  #err{
+    margin:20px; padding:14px 16px; border-left:2px solid var(--coral-low);
+    background:rgba(198,90,78,0.08); font-size:12px; line-height:1.5; display:none;
   }
-  #tooltip .tt-score{ font-size:18px; font-weight:700; }
 </style>
 </head>
 <body>
@@ -140,181 +118,128 @@
     <span>Hm0 <b id="meta-hm0">—</b></span>
     <span>Tp <b id="meta-tp">—</b></span>
     <span>Swell <b id="meta-dir">—</b></span>
+  </div>
+  <div class="meta">
     <span>Lectura <b id="meta-ts">—</b></span>
   </div>
 </header>
 
-<main>
-  <div id="chart-panel">
-    <div class="chart-title">Carta de costa (oeste → este)</div>
-    <svg id="coastSvg" viewBox="0 0 640 460"></svg>
-  </div>
-  <div class="panel">
+<div id="err"></div>
+
+<main id="app" style="display:none;">
+  <section>
+    <div class="section-title">Ranking</div>
     <div id="ranking"></div>
-    <div class="chart-wrap">
-      <div class="chart-title">Score por spot</div>
-      <canvas id="scoreChart"></canvas>
-    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Score por spot</div>
+    <div class="chart-box"><canvas id="scoreChart"></canvas></div>
+  </section>
+
+  <section>
+    <div class="section-title">Carta de costa (oeste → este)</div>
+    <div class="coast-edge">OESTE — Tapia de Casariego</div>
+    <div class="coast-list" id="coastList"></div>
+    <div class="coast-edge" style="text-align:right;">ESTE — San Antolín (Llanes)</div>
+  </section>
+
+  <section>
     <div class="note">
       Dato de oleaje: boya de Cabo de Peñas (Puertos del Estado). Dato de viento: AEMET OpenData,
-      estación terrestre más cercana a cada spot. Este panel lee un JSON estático generado por el
-      script de Python — no hay llamadas al navegador contra las APIs originales. La carta de costa
-      es una proyección simplificada por longitud (oeste→este), no cartografía real: posición
-      aproximada, pendiente de afinar sobre un mapa real antes de publicar nada.
+      estación terrestre más cercana a cada spot. Coordenadas de spots aproximadas por longitud,
+      pendientes de afinar sobre un mapa real. Actualización automática cada hora vía GitHub Actions.
     </div>
-  </div>
+  </section>
 </main>
 
-<div id="tooltip"></div>
-
 <script>
-let DATA = null;
-
-async function loadData() {
-  try {
-    const res = await fetch('ranking.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    DATA = await res.json();
-    render();
-  } catch (err) {
-    document.getElementById('chart-panel').innerHTML =
-      `<div class="chart-title">Error</div>
-       <div class="note" style="margin-top:0;border-color:#c65a4e;background:rgba(198,90,78,0.08);">
-       No se ha podido cargar ranking.json (${err.message}). Comprueba que el archivo existe
-       en la misma carpeta que este HTML y que se sirve por HTTP (no abierto como file://,
-       los navegadores bloquean fetch() en local sin servidor).</div>`;
-  }
-}
-
 function scoreColor(s){
   if(s >= 60) return "#5fa8a0";
   if(s >= 40) return "#e8a94c";
   return "#c65a4e";
 }
 
-function render() {
-document.getElementById('meta-hm0').textContent = DATA.buoy.hm0 + " m";
-document.getElementById('meta-tp').textContent = DATA.buoy.tp + " s";
-document.getElementById('meta-dir').textContent = DATA.buoy.dir + "°";
-document.getElementById('meta-ts').textContent = new Date(DATA.buoy.ts).toLocaleString('es-ES', {hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit'}) + " UTC";
-
-// ---------- Carta de costa (SVG, oeste -> este por longitud) ----------
-const svgNS = "http://www.w3.org/2000/svg";
-const svg = document.getElementById('coastSvg');
-const W = 640, H = 460, PAD = 50;
-const spotsByLon = [...DATA.spots].sort((a,b) => a.lon - b.lon);
-const lonMin = Math.min(...DATA.spots.map(s=>s.lon)) - 0.15;
-const lonMax = Math.max(...DATA.spots.map(s=>s.lon)) + 0.15;
-function xFor(lon){ return PAD + (lon - lonMin) / (lonMax - lonMin) * (W - PAD*2); }
-
-// línea de costa
-const coastY = H/2;
-const line = document.createElementNS(svgNS, 'line');
-line.setAttribute('x1', PAD); line.setAttribute('x2', W-PAD);
-line.setAttribute('y1', coastY); line.setAttribute('y2', coastY);
-line.setAttribute('stroke', 'rgba(238,241,230,0.15)');
-line.setAttribute('stroke-width', '1');
-svg.appendChild(line);
-
-['OESTE (Tapia)', 'ESTE (Llanes)'].forEach((label, i) => {
-  const t = document.createElementNS(svgNS, 'text');
-  t.setAttribute('x', i === 0 ? PAD : W - PAD);
-  t.setAttribute('y', coastY + 34);
-  t.setAttribute('text-anchor', i === 0 ? 'start' : 'end');
-  t.setAttribute('class', 'coast-label');
-  t.textContent = label;
-  svg.appendChild(t);
-});
-
-const tooltip = document.getElementById('tooltip');
-
-spotsByLon.forEach((spot, i) => {
-  const x = xFor(spot.lon);
-  const above = i % 2 === 0;
-  const y = coastY + (above ? -1 : 1) * (46 + (i % 3) * 18);
-  const color = scoreColor(spot.score);
-
-  const stem = document.createElementNS(svgNS, 'line');
-  stem.setAttribute('x1', x); stem.setAttribute('x2', x);
-  stem.setAttribute('y1', coastY); stem.setAttribute('y2', y);
-  stem.setAttribute('class', 'stem');
-  svg.appendChild(stem);
-
-  const dot = document.createElementNS(svgNS, 'circle');
-  dot.setAttribute('cx', x); dot.setAttribute('cy', y);
-  dot.setAttribute('r', 8);
-  dot.setAttribute('fill', color);
-  dot.setAttribute('class', 'spot-dot');
-  dot.addEventListener('mousemove', (e) => {
-    tooltip.style.display = 'block';
-    tooltip.style.left = (e.clientX + 14) + 'px';
-    tooltip.style.top = (e.clientY + 14) + 'px';
-    tooltip.innerHTML = `<div class="tt-score" style="color:${color}">${spot.score.toFixed(1)}</div>
-      <div style="font-weight:600;margin-top:2px;">${spot.name}</div>
-      <div style="opacity:0.7;margin-top:4px;">${spot.nota}</div>
-      <div style="opacity:0.55;margin-top:6px;">Viento ${spot.wind_kmh} km/h · ${spot.wind_dir}°</div>`;
-  });
-  dot.addEventListener('mouseleave', () => tooltip.style.display = 'none');
-  svg.appendChild(dot);
-
-  const label = document.createElementNS(svgNS, 'text');
-  label.setAttribute('x', x);
-  label.setAttribute('y', above ? y - 14 : y + 22);
-  label.setAttribute('text-anchor', 'middle');
-  label.setAttribute('class', 'spot-label');
-  label.textContent = spot.name;
-  svg.appendChild(label);
-
-  const sub = document.createElementNS(svgNS, 'text');
-  sub.setAttribute('x', x);
-  sub.setAttribute('y', above ? y - 3 : y + 34);
-  sub.setAttribute('text-anchor', 'middle');
-  sub.setAttribute('class', 'spot-sub');
-  sub.textContent = spot.score.toFixed(0);
-  svg.appendChild(sub);
-});
-
-// ---------- Ranking lateral ----------
-const sorted = [...DATA.spots].sort((a,b) => b.score - a.score);
-const rankingEl = document.getElementById('ranking');
-sorted.forEach((spot, i) => {
-  const color = scoreColor(spot.score);
-  const row = document.createElement('div');
-  row.className = 'rank-row';
-  row.innerHTML = `
-    <div class="rank-num">${String(i+1).padStart(2,'0')}</div>
-    <div>
-      <div class="rank-name">${spot.name}<small>${spot.nota}</small></div>
-      <div class="bar-track"><div class="bar-fill" style="width:${spot.score}%; background:${color}"></div></div>
-    </div>
-    <div class="rank-score" style="color:${color}">${spot.score.toFixed(1)}</div>
-  `;
-  rankingEl.appendChild(row);
-});
-
-// ---------- Gráfico ----------
-new Chart(document.getElementById('scoreChart'), {
-  type: 'bar',
-  data: {
-    labels: sorted.map(s => s.name),
-    datasets: [{
-      data: sorted.map(s => s.score),
-      backgroundColor: sorted.map(s => scoreColor(s.score)),
-      borderRadius: 3,
-      barThickness: 14
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { min: 0, max: 100, grid: { color: 'rgba(238,241,230,0.08)' }, ticks: { color: 'rgba(238,241,230,0.5)', font: { size: 10 } } },
-      y: { grid: { display: false }, ticks: { color: 'rgba(238,241,230,0.75)', font: { size: 10.5 } } }
-    }
+async function loadData(){
+  try{
+    const res = await fetch('ranking.json', { cache: 'no-store' });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const DATA = await res.json();
+    render(DATA);
+  }catch(err){
+    const el = document.getElementById('err');
+    el.style.display = 'block';
+    el.innerHTML = `<b>Error cargando ranking.json:</b> ${err.message}. Comprueba que el archivo
+      existe en el repo y que GitHub Pages está sirviendo desde la rama correcta.`;
   }
-});
-} // fin render()
+}
+
+function render(DATA){
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('meta-hm0').textContent = DATA.buoy.hm0 + " m";
+  document.getElementById('meta-tp').textContent = DATA.buoy.tp + " s";
+  document.getElementById('meta-dir').textContent = DATA.buoy.dir + "°";
+  document.getElementById('meta-ts').textContent =
+    new Date(DATA.buoy.ts).toLocaleString('es-ES', {hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit'}) + " UTC";
+
+  const sorted = [...DATA.spots].sort((a,b) => b.score - a.score);
+  const byLon = [...DATA.spots].sort((a,b) => a.lon - b.lon);
+
+  // Ranking
+  const rankingEl = document.getElementById('ranking');
+  sorted.forEach((spot, i) => {
+    const color = scoreColor(spot.score);
+    const row = document.createElement('div');
+    row.className = 'rank-row';
+    row.innerHTML = `
+      <div class="rank-num">${String(i+1).padStart(2,'0')}</div>
+      <div>
+        <div class="rank-name">${spot.name}<small>${spot.nota}</small></div>
+        <div class="bar-track"><div class="bar-fill" style="width:${spot.score}%; background:${color}"></div></div>
+      </div>
+      <div class="rank-score" style="color:${color}">${spot.score.toFixed(1)}</div>
+    `;
+    rankingEl.appendChild(row);
+  });
+
+  // Carta de costa: lista vertical, una fila por spot, sin solapes posibles
+  const coastEl = document.getElementById('coastList');
+  byLon.forEach(spot => {
+    const color = scoreColor(spot.score);
+    const row = document.createElement('div');
+    row.className = 'coast-row';
+    row.innerHTML = `
+      <div class="coast-dot" style="background:${color}"></div>
+      <div class="coast-name">${spot.name}</div>
+      <div class="coast-score" style="color:${color}">${spot.score.toFixed(0)}</div>
+    `;
+    coastEl.appendChild(row);
+  });
+
+  // Gráfico — contenedor con altura fija (chart-box), maintainAspectRatio:false
+  new Chart(document.getElementById('scoreChart'), {
+    type: 'bar',
+    data: {
+      labels: sorted.map(s => s.name),
+      datasets: [{
+        data: sorted.map(s => s.score),
+        backgroundColor: sorted.map(s => scoreColor(s.score)),
+        borderRadius: 3,
+        barThickness: 12
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { min: 0, max: 100, grid: { color: 'rgba(238,241,230,0.08)' }, ticks: { color: 'rgba(238,241,230,0.5)', font: { size: 9 } } },
+        y: { grid: { display: false }, ticks: { color: 'rgba(238,241,230,0.75)', font: { size: 9.5 } } }
+      }
+    }
+  });
+}
 
 loadData();
 </script>
