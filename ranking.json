@@ -25,6 +25,24 @@
       "nota": "Mejor a 4-6 pies con NW"
     },
     {
+      "name": "Playa de Otur",
+      "lat": 43.553,
+      "lon": -6.597,
+      "score": 28.6,
+      "wind_kmh": 15.8,
+      "wind_dir": 272.0,
+      "nota": "\"Brutal Beach\": surfable con cualquier marea, muy consistente todo el año"
+    },
+    {
+      "name": "Playa de Cueva",
+      "lat": 43.55,
+      "lon": -6.469,
+      "score": 24.6,
+      "wind_kmh": 15.8,
+      "wind_dir": 272.0,
+      "nota": "Desembocadura del Esva, corrientes fuertes; solo funciona de vez en cuando"
+    },
+    {
       "name": "Playa de Aguilar",
       "lat": 43.548,
       "lon": -6.098,
@@ -124,5 +142,5 @@
       "nota": "Muy abierta, aguanta mucha mar"
     }
   ],
-  "generated_at": "2026-07-25T20:57:51.004712+00:00"
+  "generated_at": "2026-07-25T21:02:12.006248+00:00"
 }
