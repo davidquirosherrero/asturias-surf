@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ranking de spots — Asturias</title>
+<title>Costa Viva — Dónde hay olas en Asturias ahora</title>
+<meta name="description" content="Ranking en vivo de 15 spots de surf en Asturias: oleaje real (boyas), viento (AEMET) y un score por spot, actualizado cada hora.">
+<meta name="theme-color" content="#0b1d33">
+<meta property="og:title" content="Costa Viva — ¿Dónde hay olas ahora en Asturias?">
+<meta property="og:description" content="Ranking en vivo de 15 spots de surf, con oleaje real y viento actualizados cada hora. Sin apps, sin registro.">
+<meta property="og:type" content="website">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
@@ -23,30 +28,68 @@
     color:var(--chart-cream);
     font-family:'Courier New', ui-monospace, monospace;
   }
-  header{ padding:24px 20px 16px; border-bottom:1px solid rgba(238,241,230,0.15); }
-  .eyebrow{ font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--seafoam); margin:0 0 6px; }
-  h1{ margin:0; font-family:Georgia, 'Times New Roman', serif; font-weight:400; font-size:24px; line-height:1.2; }
-  .meta{ margin-top:12px; font-size:12px; color:rgba(238,241,230,0.65); display:flex; gap:8px 16px; flex-wrap:wrap; }
+  header{ padding:22px 20px 14px; border-bottom:1px solid rgba(238,241,230,0.15); }
+  .eyebrow{ font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--seafoam); margin:0 0 6px; display:flex; justify-content:space-between; align-items:center; }
+  .brand{ display:flex; align-items:baseline; gap:8px; }
+  h1{ margin:0; font-family:Georgia, 'Times New Roman', serif; font-weight:400; font-size:22px; line-height:1.2; }
+  .tagline{ font-size:12.5px; color:rgba(238,241,230,0.6); margin-top:4px; }
+  .meta{ margin-top:10px; font-size:11px; color:rgba(238,241,230,0.55); display:flex; gap:6px 14px; flex-wrap:wrap; }
   .meta b{color:var(--chart-cream); font-weight:600;}
-  main{ max-width:720px; margin:0 auto; }
-  section{ padding:22px 20px; }
-  section + section{ border-top:1px solid rgba(238,241,230,0.1); }
-  .section-title{ font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--seafoam); margin-bottom:16px; }
+  .share-btn{
+    background:none; border:1px solid rgba(238,241,230,0.3); color:var(--chart-cream);
+    font-family:inherit; font-size:10.5px; padding:4px 10px; border-radius:20px; cursor:pointer;
+  }
+  .share-btn:active{ background:rgba(238,241,230,0.1); }
 
-  #map{ height:360px; border-radius:6px; }
+  /* Nav rápida sticky */
+  nav{
+    position:sticky; top:0; z-index:20; background:var(--navy-deep);
+    display:flex; gap:0; border-bottom:1px solid rgba(238,241,230,0.15);
+  }
+  nav a{
+    flex:1; text-align:center; padding:11px 4px; font-size:11px; letter-spacing:0.04em;
+    color:rgba(238,241,230,0.6); text-decoration:none; border-right:1px solid rgba(238,241,230,0.08);
+  }
+  nav a:last-child{ border-right:none; }
+
+  main{ max-width:720px; margin:0 auto; }
+
+  /* Hero: mejor spot ahora mismo */
+  .hero{
+    margin:18px 20px; padding:18px; border-radius:8px;
+    background:linear-gradient(135deg, rgba(95,168,160,0.14), rgba(95,168,160,0.02));
+    border:1px solid rgba(95,168,160,0.3);
+  }
+  .hero-label{ font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--seafoam); margin-bottom:8px; }
+  .hero-name{ font-family:Georgia, serif; font-size:22px; }
+  .hero-row{ display:flex; justify-content:space-between; align-items:flex-end; gap:12px; }
+  .hero-score{ font-size:34px; font-weight:700; color:var(--seafoam); line-height:1; }
+  .hero-detail{ font-size:11.5px; color:rgba(238,241,230,0.65); margin-top:8px; }
+
+  section{ padding:20px 20px 22px; }
+  section + section{ border-top:1px solid rgba(238,241,230,0.1); }
+  .section-title{ font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--seafoam); margin-bottom:6px; }
+  .section-sub{ font-size:11px; color:rgba(238,241,230,0.5); margin-bottom:16px; line-height:1.5; }
+
+  #map{ height:340px; border-radius:6px; }
   .leaflet-popup-content-wrapper{ background:var(--navy); color:var(--chart-cream); font-family:'Courier New', monospace; border-radius:4px; }
   .leaflet-popup-tip{ background:var(--navy); }
   .popup-score{ font-size:19px; font-weight:700; }
 
+  .legend{ display:flex; gap:16px; font-size:10.5px; color:rgba(238,241,230,0.6); margin-bottom:14px; flex-wrap:wrap; }
+  .legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .legend i{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+
   .rank-row{
     display:grid; grid-template-columns:24px 1fr 52px; align-items:center; gap:10px;
-    padding:11px 0; border-bottom:1px solid rgba(238,241,230,0.08);
+    padding:12px 0; border-bottom:1px solid rgba(238,241,230,0.08); cursor:pointer;
   }
   .rank-row:last-child{ border-bottom:none; }
+  .rank-row:active{ background:rgba(238,241,230,0.04); }
   .rank-num{ color:rgba(238,241,230,0.4); font-size:12px; }
   .rank-name{ font-size:13.5px; }
   .rank-name small{ display:block; color:rgba(238,241,230,0.5); font-size:11px; margin-top:2px; line-height:1.4; }
-  .rank-name .rank-detail{ color:var(--seafoam); font-size:10.5px; margin-top:4px; }
+  .rank-name .rank-detail{ color:var(--seafoam); font-size:10.5px; margin-top:4px; display:block; }
   .rank-score{ text-align:right; font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; }
   .bar-track{ height:3px; background:rgba(238,241,230,0.1); margin-top:6px; border-radius:2px; overflow:hidden; grid-column:2 / span 2; }
   .bar-fill{ height:100%; border-radius:2px; }
@@ -61,45 +104,68 @@
     margin:20px; padding:14px 16px; border-left:2px solid var(--coral-low);
     background:rgba(198,90,78,0.08); font-size:12px; line-height:1.5; display:none;
   }
+  footer{ padding:18px 20px 32px; font-size:10.5px; color:rgba(238,241,230,0.35); text-align:center; }
 </style>
 </head>
 <body>
 
 <header>
-  <p class="eyebrow">Piloto · dato en vivo</p>
-  <h1>Ranking de spots — costa asturiana</h1>
-  <div class="meta">
-    <span>Boyas · <b>Cabo de Peñas</b> · <b>Estaca de Bares</b> · <b>Bilbao-Vizcaya</b></span>
-  </div>
+  <p class="eyebrow">
+    <span class="brand">🌊 <b style="color:var(--chart-cream)">COSTA VIVA</b></span>
+    <button class="share-btn" id="shareBtn">Compartir</button>
+  </p>
+  <h1>¿Dónde hay olas ahora en Asturias?</h1>
+  <p class="tagline">15 spots, dato real de boya + viento, actualizado cada hora. Sin apps, sin cuenta.</p>
   <div class="meta" id="buoysRow"></div>
+  <div class="meta"><span id="freshness">—</span></div>
 </header>
+
+<nav>
+  <a href="#hero">Ahora</a>
+  <a href="#mapa">Mapa</a>
+  <a href="#ranking">Ranking</a>
+  <a href="#grafico">Gráfico</a>
+</nav>
 
 <div id="err"></div>
 
 <main id="app" style="display:none;">
-  <section>
+  <div class="hero" id="hero"></div>
+
+  <section id="mapa">
     <div class="section-title">Mapa</div>
+    <div class="section-sub">Toca un punto o una fila del ranking para centrar el mapa en ese spot.</div>
     <div id="map"></div>
   </section>
 
-  <section>
+  <section id="ranking">
     <div class="section-title">Ranking</div>
-    <div id="ranking"></div>
+    <div class="legend">
+      <span><i style="background:#5fa8a0"></i> 60-100 · va bien</span>
+      <span><i style="background:#e8a94c"></i> 40-59 · regular</span>
+      <span><i style="background:#c65a4e"></i> 0-39 · flojo</span>
+    </div>
+    <div id="ranking-list"></div>
   </section>
 
-  <section>
+  <section id="grafico">
     <div class="section-title">Score por spot</div>
     <div class="chart-box"><canvas id="scoreChart"></canvas></div>
   </section>
 
   <section>
     <div class="note">
-      Dato de oleaje: boya de Cabo de Peñas (Puertos del Estado). Dato de viento: AEMET OpenData,
-      estación terrestre más cercana a cada spot. Coordenadas de spots aproximadas (centro del
-      arenal), pendientes de afinar. Actualización automática cada hora vía GitHub Actions.
+      <b>Cómo se calcula:</b> cada spot tiene asignada la boya de oleaje más cercana (Cabo de Peñas,
+      Estaca de Bares o Bilbao-Vizcaya) y la estación de viento AEMET más próxima. El score combina
+      dirección y altura de ola, periodo, y dirección/fuerza del viento respecto a lo ideal para ese
+      spot en concreto. Es un piloto: los datos de "condiciones óptimas" por spot vienen de guías de
+      surf generales, no de medición local — si algo no cuadra con lo que ves en el agua, tiene sentido
+      que así sea, y es una señal para afinarlo.
     </div>
   </section>
 </main>
+
+<footer>Dato: Puertos del Estado (oleaje) · AEMET OpenData (viento) · actualización automática por GitHub Actions</footer>
 
 <script>
 function scoreColor(s){
@@ -126,6 +192,15 @@ function spotDetailLine(spot){
   return parts.join('  ·  ');
 }
 
+function relativeTime(iso){
+  const diffMin = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+  if(diffMin < 1) return "actualizado ahora mismo";
+  if(diffMin === 1) return "actualizado hace 1 minuto";
+  if(diffMin < 60) return `actualizado hace ${diffMin} minutos`;
+  const h = Math.round(diffMin / 60);
+  return `actualizado hace ${h} hora${h > 1 ? 's' : ''}`;
+}
+
 async function loadData(){
   try{
     const res = await fetch('ranking.json', { cache: 'no-store' });
@@ -141,24 +216,40 @@ async function loadData(){
 
 function render(DATA){
   document.getElementById('app').style.display = 'block';
+
   const buoysRow = document.getElementById('buoysRow');
   Object.values(DATA.buoys).forEach(b => {
     const span = document.createElement('span');
-    span.innerHTML = `${b.nombre}: <b>${b.hm0}m ${b.tp}s ${b.dir}°${compass(b.dir)}</b>`;
+    span.innerHTML = `${b.nombre}: <b>${b.hm0}m ${b.tp}s ${compass(b.dir)}</b>`;
     buoysRow.appendChild(span);
   });
+  document.getElementById('freshness').textContent = relativeTime(DATA.generated_at);
 
   const sorted = [...DATA.spots].sort((a,b) => b.score - a.score);
+
+  // --- Hero: mejor spot ahora ---
+  const best = sorted[0];
+  const bestColor = scoreColor(best.score);
+  document.getElementById('hero').innerHTML = `
+    <div class="hero-label">Mejor opción ahora mismo</div>
+    <div class="hero-row">
+      <div>
+        <div class="hero-name">${best.name}</div>
+        <div class="hero-detail">${spotDetailLine(best)}</div>
+      </div>
+      <div class="hero-score" style="color:${bestColor}">${best.score.toFixed(0)}</div>
+    </div>
+  `;
 
   // --- Mapa real ---
   const centerLat = DATA.spots.reduce((s,x)=>s+x.lat,0) / DATA.spots.length;
   const centerLon = DATA.spots.reduce((s,x)=>s+x.lon,0) / DATA.spots.length;
   const map = L.map('map').setView([centerLat, centerLon], 9);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors',
-    maxZoom: 15
+    attribution: '© OpenStreetMap contributors', maxZoom: 15
   }).addTo(map);
 
+  const markersByName = {};
   DATA.spots.forEach(spot => {
     const color = scoreColor(spot.score);
     const marker = L.circleMarker([spot.lat, spot.lon], {
@@ -170,10 +261,11 @@ function render(DATA){
        <div style="opacity:0.75;margin-top:4px;font-size:11px;">${spot.nota}</div>
        <div style="opacity:0.65;margin-top:6px;font-size:11px;">${spotDetailLine(spot)}</div>`
     );
+    markersByName[spot.name] = marker;
   });
 
   // --- Ranking ---
-  const rankingEl = document.getElementById('ranking');
+  const rankingEl = document.getElementById('ranking-list');
   sorted.forEach((spot, i) => {
     const color = scoreColor(spot.score);
     const row = document.createElement('div');
@@ -181,13 +273,16 @@ function render(DATA){
     row.innerHTML = `
       <div class="rank-num">${String(i+1).padStart(2,'0')}</div>
       <div>
-        <div class="rank-name">${spot.name}<small>${spot.nota}</small><small class="rank-detail">${spotDetailLine(spot)}</small></div>
+        <div class="rank-name">${spot.name}<small>${spot.nota}</small><span class="rank-detail">${spotDetailLine(spot)}</span></div>
         <div class="bar-track"><div class="bar-fill" style="width:${spot.score}%; background:${color}"></div></div>
       </div>
       <div class="rank-score" style="color:${color}">${spot.score.toFixed(1)}</div>
     `;
-    row.style.cursor = 'pointer';
-    row.addEventListener('click', () => map.flyTo([spot.lat, spot.lon], 12, { duration: 0.6 }));
+    row.addEventListener('click', () => {
+      document.getElementById('mapa').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      map.flyTo([spot.lat, spot.lon], 12, { duration: 0.6 });
+      setTimeout(() => markersByName[spot.name].openPopup(), 650);
+    });
     rankingEl.appendChild(row);
   });
 
@@ -212,6 +307,23 @@ function render(DATA){
     }
   });
 }
+
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  const shareData = {
+    title: 'Costa Viva — ¿Dónde hay olas ahora en Asturias?',
+    text: 'Ranking en vivo de spots de surf en Asturias, con oleaje y viento reales.',
+    url: window.location.href
+  };
+  if(navigator.share){
+    try{ await navigator.share(shareData); }catch(e){}
+  } else {
+    await navigator.clipboard.writeText(window.location.href);
+    const btn = document.getElementById('shareBtn');
+    const original = btn.textContent;
+    btn.textContent = '¡Copiado!';
+    setTimeout(() => btn.textContent = original, 1500);
+  }
+});
 
 loadData();
 </script>
