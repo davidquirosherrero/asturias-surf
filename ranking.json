@@ -1,0 +1,83 @@
+{
+  "buoy": {
+    "hm0": 1.76,
+    "tp": 7.03,
+    "dir": 0,
+    "ts": "2026-07-25T20:00:00+00:00"
+  },
+  "spots": [
+    {
+      "name": "Tapia de Casariego",
+      "lon": -6.942,
+      "score": 34.6,
+      "wind_kmh": 4.7,
+      "wind_dir": 337.0,
+      "nota": "Orientación occidental: el NE es offshore/lateral aquí, al revés que en el resto de Asturias"
+    },
+    {
+      "name": "Frejulfe",
+      "lon": -6.687,
+      "score": 24.6,
+      "wind_kmh": 15.8,
+      "wind_dir": 272.0,
+      "nota": "Mejor a 4-6 pies con NW"
+    },
+    {
+      "name": "Salinas / Espartal",
+      "lon": -5.993,
+      "score": 34.6,
+      "wind_kmh": 20.2,
+      "wind_dir": 270.0,
+      "nota": "Muy consistente, funciona con poco mar"
+    },
+    {
+      "name": "Xagó",
+      "lon": -5.798,
+      "score": 24.6,
+      "wind_kmh": 17.3,
+      "wind_dir": 272.0,
+      "nota": "Potente, mejor en marea media-alta"
+    },
+    {
+      "name": "Playón de Bayas",
+      "lon": -6.035,
+      "score": 24.6,
+      "wind_kmh": 20.2,
+      "wind_dir": 270.0,
+      "nota": "Funciona incluso en meses pequeños de verano"
+    },
+    {
+      "name": "San Lorenzo",
+      "lon": -5.642,
+      "score": 24.6,
+      "wind_kmh": 5.4,
+      "wind_dir": 197.0,
+      "nota": "Urbana, accesible, moderada"
+    },
+    {
+      "name": "Rodiles",
+      "lon": -5.381,
+      "score": 24.6,
+      "wind_kmh": 10.4,
+      "wind_dir": 274.0,
+      "nota": "Desembocadura, marea baja-media subiendo, muy técnico"
+    },
+    {
+      "name": "Santa Marina",
+      "lon": -5.057,
+      "score": 54.6,
+      "wind_kmh": 10.4,
+      "wind_dir": 274.0,
+      "nota": "Orientada NE, abrigada de todo salvo viento Norte"
+    },
+    {
+      "name": "San Antolín",
+      "lon": -4.79,
+      "score": 24.6,
+      "wind_kmh": 7.6,
+      "wind_dir": 246.0,
+      "nota": "Muy abierta, aguanta mucha mar"
+    }
+  ],
+  "generated_at": "2026-07-25T20:45:31.584992+00:00"
+}
