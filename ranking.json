@@ -27,15 +27,15 @@
       "name": "Tapia de Casariego",
       "lat": 43.5667,
       "lon": -6.942,
-      "score": 57.7,
+      "score": 57.3,
       "boya": "Estaca de Bares",
       "hm0": 1.17,
       "tp": 7.03,
       "swell_dir": 323,
-      "wind_kmh": 7.2,
-      "wind_dir": 348.0,
-      "wind_gust_kmh": 19.8,
-      "temp_c": 17.6,
+      "wind_kmh": 4.3,
+      "wind_dir": 347.0,
+      "wind_gust_kmh": 15.1,
+      "temp_c": 17.5,
       "nota": "Orientación occidental: el NE es offshore/lateral aquí, al revés que en el resto de Asturias"
     },
     {
@@ -47,10 +47,10 @@
       "hm0": 1.17,
       "tp": 7.03,
       "swell_dir": 323,
-      "wind_kmh": 14.0,
-      "wind_dir": 2.0,
-      "wind_gust_kmh": 38.5,
-      "temp_c": 18.2,
+      "wind_kmh": 12.2,
+      "wind_dir": 323.0,
+      "wind_gust_kmh": 16.9,
+      "temp_c": 18.0,
       "nota": "Mejor a 4-6 pies con NW"
     },
     {
@@ -62,10 +62,10 @@
       "hm0": 1.17,
       "tp": 7.03,
       "swell_dir": 323,
-      "wind_kmh": 14.0,
-      "wind_dir": 2.0,
-      "wind_gust_kmh": 38.5,
-      "temp_c": 18.2,
+      "wind_kmh": 12.2,
+      "wind_dir": 323.0,
+      "wind_gust_kmh": 16.9,
+      "temp_c": 18.0,
       "nota": "\"Brutal Beach\": surfable con cualquier marea, muy consistente todo el año"
     },
     {
@@ -77,10 +77,10 @@
       "hm0": 1.17,
       "tp": 7.03,
       "swell_dir": 323,
-      "wind_kmh": 14.0,
-      "wind_dir": 2.0,
-      "wind_gust_kmh": 38.5,
-      "temp_c": 18.2,
+      "wind_kmh": 12.2,
+      "wind_dir": 323.0,
+      "wind_gust_kmh": 16.9,
+      "temp_c": 18.0,
       "nota": "Desembocadura del Esva, corrientes fuertes; solo funciona de vez en cuando"
     },
     {
@@ -93,9 +93,9 @@
       "tp": 7.03,
       "swell_dir": 323,
       "wind_kmh": 5.4,
-      "wind_dir": 260.0,
-      "wind_gust_kmh": 20.5,
-      "temp_c": 18.6,
+      "wind_dir": 360.0,
+      "wind_gust_kmh": 16.6,
+      "temp_c": 17.9,
       "nota": "Olas nobles, buena para iniciación"
     },
     {
@@ -108,9 +108,9 @@
       "tp": 12.5,
       "swell_dir": 337,
       "wind_kmh": 5.4,
-      "wind_dir": 260.0,
-      "wind_gust_kmh": 20.5,
-      "temp_c": 18.6,
+      "wind_dir": 360.0,
+      "wind_gust_kmh": 16.6,
+      "temp_c": 17.9,
       "nota": "Muy consistente, funciona con poco mar"
     },
     {
@@ -123,39 +123,39 @@
       "tp": 12.5,
       "swell_dir": 337,
       "wind_kmh": 5.4,
-      "wind_dir": 260.0,
-      "wind_gust_kmh": 20.5,
-      "temp_c": 18.6,
+      "wind_dir": 360.0,
+      "wind_gust_kmh": 16.6,
+      "temp_c": 17.9,
       "nota": "Funciona incluso en meses pequeños de verano"
     },
     {
       "name": "Bañugues",
       "lat": 43.606,
       "lon": -5.766,
-      "score": 71.7,
+      "score": 55.0,
       "boya": "Cabo de Peñas",
       "hm0": 1.41,
       "tp": 12.5,
       "swell_dir": 337,
-      "wind_kmh": 9.7,
-      "wind_dir": 134.0,
-      "wind_gust_kmh": 26.6,
-      "temp_c": 19.3,
+      "wind_kmh": 6.5,
+      "wind_dir": 176.0,
+      "wind_gust_kmh": 20.9,
+      "temp_c": 18.5,
       "nota": "Condiciones particulares, exige NW limpio"
     },
     {
       "name": "Xagó",
       "lat": 43.605,
       "lon": -5.798,
-      "score": 67.5,
+      "score": 50.8,
       "boya": "Cabo de Peñas",
       "hm0": 1.41,
       "tp": 12.5,
       "swell_dir": 337,
-      "wind_kmh": 9.7,
-      "wind_dir": 134.0,
-      "wind_gust_kmh": 26.6,
-      "temp_c": 19.3,
+      "wind_kmh": 6.5,
+      "wind_dir": 176.0,
+      "wind_gust_kmh": 20.9,
+      "temp_c": 18.5,
       "nota": "Potente, mejor en marea media-alta"
     },
     {
@@ -167,10 +167,10 @@
       "hm0": 1.41,
       "tp": 12.5,
       "swell_dir": 337,
-      "wind_kmh": 2.5,
-      "wind_dir": 335.0,
-      "wind_gust_kmh": 11.9,
-      "temp_c": 21.2,
+      "wind_kmh": 9.7,
+      "wind_dir": 38.0,
+      "wind_gust_kmh": 17.3,
+      "temp_c": 20.4,
       "nota": "Urbana, accesible, moderada"
     },
     {
@@ -182,10 +182,10 @@
       "hm0": 0.82,
       "tp": 4.88,
       "swell_dir": 303,
-      "wind_kmh": 10.4,
-      "wind_dir": 291.0,
-      "wind_gust_kmh": 18.7,
-      "temp_c": 19.3,
+      "wind_kmh": 11.9,
+      "wind_dir": 250.0,
+      "wind_gust_kmh": 22.7,
+      "temp_c": 19.2,
       "nota": "Desembocadura, marea baja-media subiendo, muy técnico"
     },
     {
@@ -197,10 +197,10 @@
       "hm0": 0.82,
       "tp": 4.88,
       "swell_dir": 303,
-      "wind_kmh": 10.4,
-      "wind_dir": 291.0,
-      "wind_gust_kmh": 18.7,
-      "temp_c": 19.3,
+      "wind_kmh": 11.9,
+      "wind_dir": 250.0,
+      "wind_gust_kmh": 22.7,
+      "temp_c": 19.2,
       "nota": "Extensa y muy abierta al Cantábrico, aguanta bien"
     },
     {
@@ -212,10 +212,10 @@
       "hm0": 0.82,
       "tp": 4.88,
       "swell_dir": 303,
-      "wind_kmh": 10.4,
-      "wind_dir": 291.0,
-      "wind_gust_kmh": 18.7,
-      "temp_c": 19.3,
+      "wind_kmh": 11.9,
+      "wind_dir": 250.0,
+      "wind_gust_kmh": 22.7,
+      "temp_c": 19.2,
       "nota": "Orientada NE, abrigada de todo salvo viento Norte"
     },
     {
@@ -249,5 +249,5 @@
       "nota": "Muy abierta, aguanta mucha mar"
     }
   ],
-  "generated_at": "2026-08-20T03:06:45.029197+00:00"
+  "generated_at": "2026-08-20T03:54:37.802876+00:00"
 }
