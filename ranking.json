@@ -32,10 +32,10 @@
       "hm0": 1.99,
       "tp": 10.55,
       "swell_dir": 317,
-      "wind_kmh": 11.5,
-      "wind_dir": 306.0,
-      "wind_gust_kmh": 29.2,
-      "temp_c": 20.6,
+      "wind_kmh": 5.8,
+      "wind_dir": 268.0,
+      "wind_gust_kmh": 25.2,
+      "temp_c": 20.9,
       "nota": "Orientación occidental: el NE es offshore/lateral aquí, al revés que en el resto de Asturias"
     },
     {
@@ -47,10 +47,10 @@
       "hm0": 1.99,
       "tp": 10.55,
       "swell_dir": 317,
-      "wind_kmh": 23.0,
-      "wind_dir": 283.0,
-      "wind_gust_kmh": 32.4,
-      "temp_c": 21.3,
+      "wind_kmh": 20.2,
+      "wind_dir": 281.0,
+      "wind_gust_kmh": 35.6,
+      "temp_c": 21.6,
       "nota": "Mejor a 4-6 pies con NW"
     },
     {
@@ -62,10 +62,10 @@
       "hm0": 1.99,
       "tp": 10.55,
       "swell_dir": 317,
-      "wind_kmh": 23.0,
-      "wind_dir": 283.0,
-      "wind_gust_kmh": 32.4,
-      "temp_c": 21.3,
+      "wind_kmh": 20.2,
+      "wind_dir": 281.0,
+      "wind_gust_kmh": 35.6,
+      "temp_c": 21.6,
       "nota": "\"Brutal Beach\": surfable con cualquier marea, muy consistente todo el año"
     },
     {
@@ -77,10 +77,10 @@
       "hm0": 1.99,
       "tp": 10.55,
       "swell_dir": 317,
-      "wind_kmh": 23.0,
-      "wind_dir": 283.0,
-      "wind_gust_kmh": 32.4,
-      "temp_c": 21.3,
+      "wind_kmh": 20.2,
+      "wind_dir": 281.0,
+      "wind_gust_kmh": 35.6,
+      "temp_c": 21.6,
       "nota": "Desembocadura del Esva, corrientes fuertes; solo funciona de vez en cuando"
     },
     {
@@ -92,10 +92,10 @@
       "hm0": 1.99,
       "tp": 10.55,
       "swell_dir": 317,
-      "wind_kmh": 15.1,
-      "wind_dir": 270.0,
+      "wind_kmh": 11.5,
+      "wind_dir": 290.0,
       "wind_gust_kmh": 24.1,
-      "temp_c": 20.8,
+      "temp_c": 20.7,
       "nota": "Olas nobles, buena para iniciación"
     },
     {
@@ -107,10 +107,10 @@
       "hm0": 1.88,
       "tp": 10.55,
       "swell_dir": 307,
-      "wind_kmh": 15.1,
-      "wind_dir": 270.0,
+      "wind_kmh": 11.5,
+      "wind_dir": 290.0,
       "wind_gust_kmh": 24.1,
-      "temp_c": 20.8,
+      "temp_c": 20.7,
       "nota": "Muy consistente, funciona con poco mar"
     },
     {
@@ -122,10 +122,10 @@
       "hm0": 1.88,
       "tp": 10.55,
       "swell_dir": 307,
-      "wind_kmh": 15.1,
-      "wind_dir": 270.0,
+      "wind_kmh": 11.5,
+      "wind_dir": 290.0,
       "wind_gust_kmh": 24.1,
-      "temp_c": 20.8,
+      "temp_c": 20.7,
       "nota": "Funciona incluso en meses pequeños de verano"
     },
     {
@@ -137,10 +137,10 @@
       "hm0": 1.88,
       "tp": 10.55,
       "swell_dir": 307,
-      "wind_kmh": 21.2,
-      "wind_dir": 270.0,
-      "wind_gust_kmh": 33.8,
-      "temp_c": 20.3,
+      "wind_kmh": 18.4,
+      "wind_dir": 317.0,
+      "wind_gust_kmh": 33.1,
+      "temp_c": 20.0,
       "nota": "Condiciones particulares, exige NW limpio"
     },
     {
@@ -152,10 +152,10 @@
       "hm0": 1.88,
       "tp": 10.55,
       "swell_dir": 307,
-      "wind_kmh": 21.2,
-      "wind_dir": 270.0,
-      "wind_gust_kmh": 33.8,
-      "temp_c": 20.3,
+      "wind_kmh": 18.4,
+      "wind_dir": 317.0,
+      "wind_gust_kmh": 33.1,
+      "temp_c": 20.0,
       "nota": "Potente, mejor en marea media-alta"
     },
     {
@@ -167,10 +167,10 @@
       "hm0": 1.88,
       "tp": 10.55,
       "swell_dir": 307,
-      "wind_kmh": 5.4,
-      "wind_dir": 210.0,
-      "wind_gust_kmh": 22.0,
-      "temp_c": 23.8,
+      "wind_kmh": 16.9,
+      "wind_dir": 46.0,
+      "wind_gust_kmh": 29.9,
+      "temp_c": 22.5,
       "nota": "Urbana, accesible, moderada"
     },
     {
@@ -182,10 +182,10 @@
       "hm0": 2.11,
       "tp": 11.13,
       "swell_dir": 303,
-      "wind_kmh": 16.2,
-      "wind_dir": 308.0,
-      "wind_gust_kmh": 25.2,
-      "temp_c": 20.5,
+      "wind_kmh": 22.0,
+      "wind_dir": 314.0,
+      "wind_gust_kmh": 30.2,
+      "temp_c": 21.2,
       "nota": "Desembocadura, marea baja-media subiendo, muy técnico"
     },
     {
@@ -197,10 +197,10 @@
       "hm0": 2.11,
       "tp": 11.13,
       "swell_dir": 303,
-      "wind_kmh": 16.2,
-      "wind_dir": 308.0,
-      "wind_gust_kmh": 25.2,
-      "temp_c": 20.5,
+      "wind_kmh": 22.0,
+      "wind_dir": 314.0,
+      "wind_gust_kmh": 30.2,
+      "temp_c": 21.2,
       "nota": "Extensa y muy abierta al Cantábrico, aguanta bien"
     },
     {
@@ -212,10 +212,10 @@
       "hm0": 2.11,
       "tp": 11.13,
       "swell_dir": 303,
-      "wind_kmh": 16.2,
-      "wind_dir": 308.0,
-      "wind_gust_kmh": 25.2,
-      "temp_c": 20.5,
+      "wind_kmh": 22.0,
+      "wind_dir": 314.0,
+      "wind_gust_kmh": 30.2,
+      "temp_c": 21.2,
       "nota": "Orientada NE, abrigada de todo salvo viento Norte"
     },
     {
@@ -227,10 +227,10 @@
       "hm0": 2.11,
       "tp": 11.13,
       "swell_dir": 303,
-      "wind_kmh": 15.8,
-      "wind_dir": 292.0,
-      "wind_gust_kmh": 27.7,
-      "temp_c": 21.5,
+      "wind_kmh": 23.8,
+      "wind_dir": 299.0,
+      "wind_gust_kmh": 30.2,
+      "temp_c": 21.1,
       "nota": "Cala más resguardada, mejor con mar moderada"
     },
     {
@@ -242,12 +242,12 @@
       "hm0": 2.11,
       "tp": 11.13,
       "swell_dir": 303,
-      "wind_kmh": 15.8,
-      "wind_dir": 292.0,
-      "wind_gust_kmh": 27.7,
-      "temp_c": 21.5,
+      "wind_kmh": 23.8,
+      "wind_dir": 299.0,
+      "wind_gust_kmh": 30.2,
+      "temp_c": 21.1,
       "nota": "Muy abierta, aguanta mucha mar"
     }
   ],
-  "generated_at": "2026-08-21T13:05:29.939371+00:00"
+  "generated_at": "2026-08-21T13:53:36.302470+00:00"
 }
